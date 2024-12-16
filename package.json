@@ -11,5 +11,10 @@
     "url": "github.com/mincong-h/github-agent"
   },
   "author": "Mincong HUANG",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
 }
