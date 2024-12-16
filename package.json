@@ -19,6 +19,7 @@
   "author": "Mincong HUANG",
   "license": "MIT",
   "devDependencies": {
+    "@types/ms": "^0.7.34",
     "@types/node": "^22.10.2",
     "@types/source-map": "^0.5.2",
     "typescript": "^5.7.2"
@@ -26,6 +27,7 @@
   "dependencies": {
     "@temporalio/activity": "^1.11.5",
     "@temporalio/workflow": "^1.11.5",
+    "ms": "^3.0.0-canary.1",
     "octokit": "^4.0.2"
   }
 }
