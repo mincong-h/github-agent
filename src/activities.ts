@@ -1,17 +1,25 @@
+import type { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
 import { Octokit } from "octokit";
+import { version } from '../package.json';
 
 
-const octokit = new Octokit();
+const octokit = new Octokit({
+    userAgent: `github-agent/v${version}`,
+});
 
 
-export interface GetRepoInfoRequest {
+type RepoResponse = RestEndpointMethodTypes["repos"]["get"]["response"];
+
+
+export type GetRepoInfoRequest = {
     name: string; // e.g. "mincong-h/mincong-h.github.io"
 }
-export interface GetRepoInfoResponse {
+export type GetRepoInfoResponse = {
     owner: string;
     repo: string;
     repo_url: string;
-    description: string;
+    clone_url: string;
+    description: string | null;
 }
 export async function getRepoInfo(request: GetRepoInfoRequest): Promise<GetRepoInfoResponse> {
     if (!request.name) {
@@ -19,25 +27,19 @@ export async function getRepoInfo(request: GetRepoInfoRequest): Promise<GetRepoI
     }
 
     const [owner, repo] = request.name.split('/');
+    console.log('requesting information on GitHub...', owner, repo);
+
     const ghResponse = octokit.request('GET /repos/{owner}/{repo}', {
         owner,
         repo,
-    });
-    const repoInfo = ghResponse.data;
-    console.log('repoInfo', repoInfo);
+    }) as RepoResponse;
 
-    const response = {
+    console.log('ghResponse.data', ghResponse.data);
+    return {
         owner,
         repo,
-        repo_url: `https://github.com/${request.name}`,
-    } as GetRepoInfoResponse;
-
-    if (request.name == 'mincong-h/learning-node') {
-        response.description = 'A repository to learn Node.js';
-    }
-    if (request.name == 'mincong-h/mincong-h.github.io') {
-        response.description = "Mincong Huang's personal website";
-    }
-
-    return response;
+        repo_url: ghResponse.data.html_url,
+        clone_url: ghResponse.data.clone_url,
+        description: ghResponse.data.description,
+    };
 }
