@@ -1,0 +1,19 @@
+{
+  "name": "@mincong/github-agent",
+  "version": "0.1.0",
+  "description": "A simple GitHub agent for demonstrating the Agent Runner feature of Composable.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/mincong-h/github-agent"
+  },
+  "author": "Mincong HUANG",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
