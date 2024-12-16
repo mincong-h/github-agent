@@ -11,6 +11,7 @@
     "type": "git",
     "url": "github.com/mincong-h/github-agent"
   },
+  "private": false,
   "author": "Mincong HUANG",
   "license": "MIT",
   "devDependencies": {
