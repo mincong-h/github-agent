@@ -25,9 +25,8 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@octokit/core": "^4.0.2",
     "@temporalio/activity": "^1.11.5",
-    "@temporalio/workflow": "^1.11.5",
-    "ms": "^3.0.0-canary.1",
-    "octokit": "^4.0.2"
+    "@temporalio/workflow": "^1.11.5"
   }
 }
