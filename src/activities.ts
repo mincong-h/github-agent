@@ -19,7 +19,7 @@ export async function getRepoInfo(request: GetRepoInfoRequest): Promise<GetRepoI
     }
 
     const [owner, repo] = request.name.split('/');
-    const ghResponse = octokit.request('GET /repos/{owner}/{repo}', {
+    const ghResponse = await octokit.request('GET /repos/{owner}/{repo}', {
         owner,
         repo,
     });

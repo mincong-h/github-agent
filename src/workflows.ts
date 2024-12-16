@@ -1,5 +1,5 @@
 import { proxyActivities } from '@temporalio/workflow';
-import type * as activities from './activities';
+import type * as activities from './activities.js';
 
 const { getRepoInfo } = proxyActivities<typeof activities>({
     startToCloseTimeout: '1m',
@@ -17,7 +17,7 @@ export async function getRepos(names: string): Promise<string[]> {
 
     const responses = await Promise.all(repoNames.map((name) => getRepoInfo({name})));
 
-    return responses.map((resp) => {
+    return responses.map((resp: any) => {
         return `The repo ${resp.repo} is owned by ${resp.owner}, and its description is ${resp.description}.
         Visit ${resp.repo_url} for more information.`;
     });
