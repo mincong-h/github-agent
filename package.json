@@ -2,8 +2,9 @@
   "name": "@mincong/github-agent",
   "version": "0.1.0",
   "description": "A simple GitHub agent for demonstrating the Agent Runner feature of Composable.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "vitest"
   },
   "repository": {
