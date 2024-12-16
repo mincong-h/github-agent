@@ -1,8 +1,11 @@
 {
     "compilerOptions": {
         "target": "ES2020",
-        "module": "ESNext",
-        "moduleResolution": "node",
+        // As octokit uses conditional exports, we need to adapt our tsconfig.json by setting
+        // "moduleResolution": "node16", "module": "node16". See
+        // https://github.com/octokit/plugin-rest-endpoint-methods.js/?tab=readme-ov-file#typescript
+        "module": "node16",
+        "moduleResolution": "node16",
         "outDir": "./dist",
         "rootDir": "./src",
         "strict": true,

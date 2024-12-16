@@ -1,4 +1,3 @@
-import type { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
 import { Octokit } from "octokit";
 import { version } from '../package.json';
 
@@ -6,9 +5,6 @@ import { version } from '../package.json';
 const octokit = new Octokit({
     userAgent: `github-agent/v${version}`,
 });
-
-
-type RepoResponse = RestEndpointMethodTypes["repos"]["get"]["response"];
 
 
 export type GetRepoInfoRequest = {
@@ -32,7 +28,7 @@ export async function getRepoInfo(request: GetRepoInfoRequest): Promise<GetRepoI
     const ghResponse = octokit.request('GET /repos/{owner}/{repo}', {
         owner,
         repo,
-    }) as RepoResponse;
+    });
 
     console.log('ghResponse.data', ghResponse.data);
     return {
