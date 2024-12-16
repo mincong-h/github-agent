@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "description": "A simple GitHub agent for demonstrating the Agent Runner feature of Composable.",
   "main": "dist/workflows.js",
+  "exports": {
+    "./activities": "./dist/activities.js",
+    "./workflows": "./dist/workflows.js"
+  },
   "scripts": {
     "build": "tsc"
   },
@@ -16,6 +20,11 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.10.2",
+    "@types/source-map": "^0.5.2",
     "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@temporalio/activity": "^1.11.5",
+    "@temporalio/workflow": "^1.11.5"
   }
 }
