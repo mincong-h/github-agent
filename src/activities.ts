@@ -1,3 +1,9 @@
+import { Octokit } from "octokit";
+
+
+const octokit = new Octokit();
+
+
 export interface GetRepoInfoRequest {
     name: string; // e.g. "mincong-h/mincong-h.github.io"
 }
@@ -13,6 +19,13 @@ export async function getRepoInfo(request: GetRepoInfoRequest): Promise<GetRepoI
     }
 
     const [owner, repo] = request.name.split('/');
+    const ghResponse = octokit.request('GET /repos/{owner}/{repo}', {
+        owner,
+        repo,
+    });
+    const repoInfo = ghResponse.data;
+    console.log('repoInfo', repoInfo);
+
     const response = {
         owner,
         repo,
