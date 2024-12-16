@@ -1,5 +1,9 @@
 # Changelog
 
+## [unreleased]
+
+* Use GitHub SDK [`octokit.js`](https://github.com/octokit/octokit.js)
+
 ## [0.1.1] - 2024-12-16
 
 * Use [Temporal Workflow](https://temporal.io/) for this agent.
