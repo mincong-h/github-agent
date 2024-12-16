@@ -19,6 +19,7 @@
   "author": "Mincong HUANG",
   "license": "MIT",
   "devDependencies": {
+    "@octokit/types": "^13.6.2",
     "@types/node": "^22.10.2",
     "@types/source-map": "^0.5.2",
     "typescript": "^5.7.2"
