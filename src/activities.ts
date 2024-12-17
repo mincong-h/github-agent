@@ -5,7 +5,7 @@ export interface GetRepoInfoResponse {
     owner: string;
     repo: string;
     repo_url: string;
-    description: string;
+    description?: string;
 }
 export async function getRepoInfo(request: GetRepoInfoRequest): Promise<GetRepoInfoResponse> {
     if (!request.name) {
@@ -13,18 +13,23 @@ export async function getRepoInfo(request: GetRepoInfoRequest): Promise<GetRepoI
     }
 
     const [owner, repo] = request.name.split('/');
-    const response = {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+        headers: {
+            'Accept': 'application/vnd.github+json',
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`GitHub API failed: ${response.status}`);
+    }
+
+    const payload = await response.json();
+    console.log('response', payload);
+
+    return {
         owner,
         repo,
-        repo_url: `https://github.com/${request.name}`,
+        repo_url: payload.html_url,
+        description: payload.description,
     } as GetRepoInfoResponse;
-
-    if (request.name == 'mincong-h/learning-node') {
-        response.description = 'A repository to learn Node.js';
-    }
-    if (request.name == 'mincong-h/mincong-h.github.io') {
-        response.description = "Mincong Huang's personal website";
-    }
-
-    return response;
 }
