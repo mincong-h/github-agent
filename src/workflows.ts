@@ -5,6 +5,14 @@ const { getRepoInfo } = proxyActivities<typeof activities>({
     startToCloseTimeout: '1m',
 });
 
+export type GetMultiRepoInfoRequest = {
+    names: string[];
+}
+export type GetMultiRepoInfoResponse = {
+    count: number;
+    repos: activities.GetRepoInfoResponse[];
+}
+
 /**
  * Get the information of a list of Git repositories.
  *
@@ -12,13 +20,11 @@ const { getRepoInfo } = proxyActivities<typeof activities>({
  *   For example, "mincong-h/mincong-h.github.io, mincong-h/learning-node"
  * @returns a list of descriptions, one per repository.
  */
-export async function getRepos(names: string): Promise<string[]> {
-    const repoNames = names.split(',').map((name) => name.trim());
+export async function getRepos(request: GetMultiRepoInfoRequest): Promise<GetMultiRepoInfoResponse> {
+    const responses = await Promise.all(request.names.map((name) => getRepoInfo({name})));
 
-    const responses = await Promise.all(repoNames.map((name) => getRepoInfo({name})));
-
-    return responses.map((resp) => {
-        return `The repo ${resp.repo} is owned by ${resp.owner}, and its description is ${resp.description}.
-        Visit ${resp.repo_url} for more information.`;
-    });
+    return {
+        count: responses.length,
+        repos: responses,
+    } as GetMultiRepoInfoResponse;
 }
