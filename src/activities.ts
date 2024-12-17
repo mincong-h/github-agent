@@ -1,7 +1,7 @@
-export interface GetRepoInfoRequest {
+export type GetRepoInfoRequest = {
     name: string; // e.g. "mincong-h/mincong-h.github.io"
 }
-export interface GetRepoInfoResponse {
+export type GetRepoInfoResponse = {
     owner: string;
     repo: string;
     repo_url: string;
